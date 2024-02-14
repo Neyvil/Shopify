@@ -50,8 +50,6 @@ like pre-computed rainbow table attacks.
 
 const loginUser = asyncHandler(async(req,res)=>{
   const{email, password}=req.body;
-  console.log(email)
-  console.log(password)
   
   const existingUser= await User.findOne({email})
   if(existingUser){
@@ -73,7 +71,17 @@ const loginUser = asyncHandler(async(req,res)=>{
 })
 
 const logoutCurrentUser=asyncHandler(async(req,res)=>{
+  res.cookie('jwt','',{
+    httpOnly: true,
+    expires: new Date(0)
+  })
 
+  res.status(200).json({message:"Log Out Succesfully"})
 })
 
-export { createUser, loginUser ,logoutCurrentUser};
+const getAllUsers=asyncHandler(async(req,res)=>{
+  const users= await User.find({});
+  res.json(users);
+})
+
+export { createUser, loginUser ,logoutCurrentUser,getAllUsers};
