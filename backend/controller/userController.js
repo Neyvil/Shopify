@@ -152,7 +152,7 @@ const deleteUserById=asyncHandler(async(req,res)=>{
   if(user){
     if (user.isAdmin) {
       res.status(400)
-      throw new Error('Cannot delete admin user');
+      throw new Error('Cannot Delete Admin User');
     }
     
     await User.deleteOne({_id: user._id})
@@ -178,6 +178,34 @@ const getUserById=asyncHandler(async(req,res)=>{
   }
 })
 
+// Updating user
+const updateUserById=asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id);
+
+  if (user){
+    // If User provide username it store to username, if not then old username will store
+    user.username = req.body.username || user.username
+
+    // If User provide email it store to email , if not then old email will store
+    user.email= req.body.email || user.email
+
+    user.isAdmin= Boolean(req.body.isAdmin)
+
+    const updateUser = await user.save()
+
+    res.json({
+      _id: updateUser.username,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin
+    })
+
+  }
+  else{
+    res.status(404);
+    throw new Error("User Not Found") ;
+  }
+})
+
 export {
   createUser,
   loginUser,
@@ -186,5 +214,6 @@ export {
   getCurrentUserProfile,
   updateCurrentUser,
   deleteUserById,
-  getUserById
+  getUserById,
+  updateUserById
 };
