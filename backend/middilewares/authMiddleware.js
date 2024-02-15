@@ -11,7 +11,7 @@ const authenticate = asyncHandler(async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.userID).select("-password");
+      req.user = await User.findById(decoded.userID).select("-password");//I did mistake here like userID->userId
       next();
     } catch (error) {
       res.status(401);
