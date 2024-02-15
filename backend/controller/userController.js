@@ -48,11 +48,16 @@ like pre-computed rainbow table attacks.
   }
 });
 
+// LOG IN USER
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  // Checking user existance through email
+
   const existingUser = await User.findOne({ email });
   if (existingUser) {
+    // Compare The Password
     const isPasswordValid = await bcrypt.compare(
       password,
       existingUser.password
@@ -60,7 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (isPasswordValid) {
       createToken(res, existingUser._id);
-
+      // Showing to the User
       res.status(201).json({
         _id: existingUser._id,
         username: existingUser.username,
@@ -72,7 +77,9 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+// LOG OUT User
 const logoutCurrentUser = asyncHandler(async (req, res) => {
+  // Just Deleting the Cookie
   res.cookie("jwt", "", {
     httpOnly: true,
     expires: new Date(0),
@@ -81,11 +88,13 @@ const logoutCurrentUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Log Out Succesfully" });
 });
 
+// Showing All Profiles To Admin
 const getAllUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
 
+// Current User Profile
 const getCurrentUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -101,19 +110,21 @@ const getCurrentUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// Updating User data
 const updateCurrentUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
+  // Checking the Username and Email
   if (user) {
     user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
-
+    // Checking the Password and Encrypting it
     if (req.body.password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
       user.password = hashedPassword;
     }
-
+    // Updating the User
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
@@ -127,6 +138,46 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
   }
 });
 
+// Deleting the USER By ADMIN
+const deleteUserById=asyncHandler(async(req,res)=>{
+
+  /*
+  "req.params.id" refers to the value of the "id" parameter in the URL 
+  (which is in route like :"router.route("/:_id")")
+  that is being sent as a part of the HTTP request.
+  */
+
+  const user = await User.findById(req.params.id);
+
+  if(user){
+    if (user.isAdmin) {
+      res.status(400)
+      throw new Error('Cannot delete admin user');
+    }
+    
+    await User.deleteOne({_id: user._id})
+    res.json({
+      message:"User Removed"
+    })
+
+  }else {
+    res.status(404) 
+    throw new Error("User Not Found") 
+  }
+
+
+});
+
+// Get User
+
+const getUserById=asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id).select('-password')
+
+  if(user){
+    res.json(user)
+  }
+})
+
 export {
   createUser,
   loginUser,
@@ -134,4 +185,6 @@ export {
   getAllUsers,
   getCurrentUserProfile,
   updateCurrentUser,
+  deleteUserById,
+  getUserById
 };
