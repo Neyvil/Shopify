@@ -24,6 +24,7 @@ router
   .get(authenticate, authorizeAdmin, getAllUsers);
 
 // Authourise Route LogIn
+http://localhost:5000/api/users/auth
 router.post("/auth", loginUser);
 
 // User Log Out
