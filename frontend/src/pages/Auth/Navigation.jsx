@@ -10,6 +10,8 @@ import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Navigation.css";
+import { UseSelector,useDispatch } from "react-redux";
+
 
 const Navigation = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -67,6 +69,12 @@ const Navigation = () => {
          <FaHeart className="mr-2 mt-[3rem]" size={26}/>
          <span className="hidden nav-item-name mt-[3rem]">HOME</span> {" "}
         </Link>
+      </div>
+
+      <div className="relative">
+        <button onClick={toggleDropdown} className=" flex items-center text-gray-8000 focus:outline-none">
+
+        </button>
       </div>
 
       <ul>
