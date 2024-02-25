@@ -39,7 +39,7 @@ const Navigation = () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
-      Navigation("/login");
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }
@@ -87,7 +87,7 @@ const Navigation = () => {
         </Link>
       </div>
 
-      <div className="relative">
+      <div className="realtive">
         <button
           onClick={toggleDropdown}
           className=" flex items-center text-gray-8000 focus:outline-none"
