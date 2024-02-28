@@ -72,8 +72,17 @@ const loginUser = asyncHandler(async (req, res) => {
         email: existingUser.email,
         isAdmin: existingUser.isAdmin,
       });
+      
       return;
     }
+    else{
+      res.status(406);
+      throw new Error("Password Does not match")
+    }
+  }
+  else{
+    res.status(407);
+    throw new Error("Username not found");
   }
 });
 
@@ -138,7 +147,7 @@ const updateCurrentUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Deleting the USER By ADMIN
+// Deleting the USER BY ADMIN
 const deleteUserById=asyncHandler(async(req,res)=>{
 
   /*
