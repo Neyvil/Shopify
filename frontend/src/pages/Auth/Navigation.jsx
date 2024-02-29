@@ -87,10 +87,10 @@ const Navigation = () => {
         </Link>
       </div>
 
-      <div className="realtive">
+      <div className="relative">
         <button
           onClick={toggleDropdown}
-          className=" flex items-center text-gray-8000 focus:outline-none"
+          className=" flex items-center text-gray-800 focus:outline-none"
         >
           {userInfo ? (
             <span className=" text-white">{userInfo.username}</span>
@@ -135,7 +135,7 @@ const Navigation = () => {
               </li> 
               <li>
                 <Link
-                  to="/admin/productslist"
+                  to="/admin/productlist"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
                   Products
@@ -180,7 +180,7 @@ const Navigation = () => {
                 <Link
                   to="/admin/logout"
                   onClick={logoutHandler}
-                  className="block px-4 py-2 hover:bg-gray-100"
+                  className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                 >
                   Logout
                 </Link>
