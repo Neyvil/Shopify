@@ -5,10 +5,16 @@ import Loader from "../component/Loader";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisiblity = () => {
+    setShowPassword(!showPassword);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,14 +76,24 @@ const Login = () => {
               >
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                className="mt-1 p-2 border rounded w-full"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+
+              <div className=" relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  className="mt-1 p-2 border rounded w-full"
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className=" absolute right-2 top-1/2 transform -translate-y-1/2"
+                  onClick={togglePasswordVisiblity}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
             </div>
 
             <button

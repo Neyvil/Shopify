@@ -5,16 +5,25 @@ import Loader from "../component/Loader";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
+import { Eye, EyeOff } from "lucide-react";
 
 const Register = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const togglePasswordVisiblity = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -34,39 +43,91 @@ const Register = () => {
         <h1 className="text-2xl font-semibold mb-4">Register</h1>
         <form className=" container w-[40rem]">
           <div className=" my-[2rem]">
-            <label htmlFor="name" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-white"
+            >
               Name
             </label>
-
-            <input type="text" id="name" className="mt-1 p-2 border rounded w-full" placeholder="Enter name" value={username} onChange={e => setUserName(e.target.value)}/>
-
+            <input
+              type="text"
+              id="name"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter name"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
           </div>
 
           <div className=" my-[2rem]">
-            <label htmlFor="email" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-white"
+            >
               Email
             </label>
 
-            <input type="text" id="email" className="mt-1 p-2 border rounded w-full" placeholder="Enter email" value={email} onChange={e => setUserName(e.target.value)}/>
-
+            <input
+              type="text"
+              id="email"
+              className="mt-1 p-2 border rounded w-full"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           <div className=" my-[2rem]">
-            <label htmlFor="password" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-white"
+            >
               Password
             </label>
-
-            <input type="password" id="password" className="mt-1 p-2 border rounded w-full" placeholder="Enter name" value={username} onChange={e => setUserName(e.target.value)}/>
-
+            <div className=" relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className="mt-1 p-2 border rounded w-full"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={togglePasswordVisiblity}
+                className=" absolute right-2 top-1/2 transform -translate-y-1/2"
+              >
+                {showPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
           </div>
 
           <div className=" my-[2rem]">
-            <label htmlFor="name" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-white"
+            >
               Confirm Password
             </label>
 
-            <input type="text" id="name" className="mt-1 p-2 border rounded w-full" placeholder="Enter name" value={username} onChange={e => setUserName(e.target.value)}/>
-
+            <div className=" relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="password"
+                className="mt-1 p-2 border rounded w-full"
+                placeholder="Enter Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className=" absolute right-2 top-1/2 transform -translate-y-1/2"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? <EyeOff /> : <Eye />}
+              </button>
+            </div>
           </div>
         </form>
       </div>

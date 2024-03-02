@@ -9,7 +9,7 @@ import store from "./redux/store.js";
 
 // Auth
 import Login from "./pages/Auth/Login.jsx";
-import register from "./pages/Auth/Register.jsx";
+import Register from "./pages/Auth/Register.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
