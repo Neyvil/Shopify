@@ -69,7 +69,7 @@ const Register = () => {
             >
               Name
             </label>
-            <div className="relative max-w-[24rem]">
+            <div className="relative">
               <input
                 type="text"
                 id="name"
@@ -114,7 +114,7 @@ const Register = () => {
             >
               Password
             </label>
-            <div className=" relative max-w-[24rem]">
+            <div className=" relative">
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
@@ -142,7 +142,7 @@ const Register = () => {
             >
               Confirm Password
             </label>
-            <div className=" relative max-w-[24rem]">
+            <div className=" relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 id="password"
