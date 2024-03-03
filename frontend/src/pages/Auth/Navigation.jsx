@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   AiOutlineHome,
   AiOutlineShopping,
@@ -18,6 +18,7 @@ const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -119,8 +120,8 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 mt-2 mr-15 space-y-2 bg-white text-gray-600 ${
-              !userInfo.isAdmin ? "-top-24" : "-top-80"
+            className={`absolute -translate-y-10 right-0 mt-2 mr-15 space-y-1/2 bg-[#403d39] text-white-600 ${
+              !userInfo.isAdmin ? "-top-20" : "-top-60"
             }`}
             
           >

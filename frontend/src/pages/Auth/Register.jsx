@@ -21,6 +21,9 @@ const Register = () => {
   const togglePasswordVisiblity = () => {
     setShowPassword(!showPassword);
   };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -39,9 +42,7 @@ const Register = () => {
     }
   };
 
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
+  ;
   const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
