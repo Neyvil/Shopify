@@ -90,7 +90,7 @@ const Register = () => {
               htmlFor="email"
               className="block text-sm font-medium text-white"
             >
-              Email
+              Email Address
             </label>
 
             <div className="relative">
@@ -184,11 +184,11 @@ const Register = () => {
           </p>
         </div>
       </div>
-      <div className="flex-1 hidden xl:block md:hidden sm:hidden">
+      <div className="flex-1 xl:block md:hidden">
         <img
           src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80"
           alt=""
-          className="h-[100vh] w-[full] rounded-lg overflow-y-hidden"
+          className="h-[60rem] w-full rounded-lg overflow-y-hidden max-md:h-[5rem]"
         />
       </div>
     </section>
