@@ -8,6 +8,7 @@ import {
   useUpdateUserMutation,
 } from "../../redux/api/usersApiSlice";
 import { toast } from "react-toastify";
+import { CircleUser } from "lucide-react";
 
 const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
@@ -56,8 +57,14 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4">Users</h1>
+    <div className="pt-9">
+      <div className="  font-bold flex justify-center pb-5">
+        <h1 className=" text-4xl">Users</h1>
+
+        <div className=" translate-y-2 translate-x-3  text-cyan-400">
+          <CircleUser size={32}/>
+        </div>
+      </div>
       {isLoading ? (
         <Loader />
       ) : error ? (
