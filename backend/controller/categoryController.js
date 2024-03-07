@@ -1,6 +1,5 @@
 import Category from "../models/categoryModel.js";
 import asyncHandler from "../middilewares/asyncHandler.js";
-import res from "express/lib/response.js";
 
 const createCategory = asyncHandler(async (req, res) => {
   try {
@@ -42,5 +41,38 @@ const updateCategory = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+const removeCategory = asyncHandler(async (req, res) => {
+  try {
+    const removed = await Category.findByIdAndDelete(req.params.categoryId);
+    res.json(removed);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-export { createCategory, updateCategory };
+const listCategory = asyncHandler(async (req, res) => {
+  try {
+    const all = await Category.find({});
+    res.json(all);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error.message);
+  }
+});
+
+const readCategory = asyncHandler(async (req, res) => {
+  try {
+    const indivisual= await Category.findById(req.params.id)
+    res.json(indivisual)
+  } catch (error) {
+    console.log(error)
+    res.status(400).json(error.message);
+  }
+});
+export {
+  createCategory,
+  updateCategory,
+  removeCategory,
+  listCategory,
+  readCategory,
+};
