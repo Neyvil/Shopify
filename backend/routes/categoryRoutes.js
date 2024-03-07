@@ -19,6 +19,6 @@ router
   .route("/:categoryId")
   .delete(authenticate, authorizeAdmin, removeCategory);
 router.route("/categories").get(listCategory);
-router.route("/:id").get(readCategory)
+router.route("/:id").get(readCategory);
 
 export default router;

@@ -62,8 +62,8 @@ const listCategory = asyncHandler(async (req, res) => {
 
 const readCategory = asyncHandler(async (req, res) => {
   try {
-    const indivisual= await Category.findById(req.params.id)
-    res.json(indivisual)
+    const category= await Category.findOne({_id:req.params.id})
+    res.json(category)
   } catch (error) {
     console.log(error)
     res.status(400).json(error.message);
