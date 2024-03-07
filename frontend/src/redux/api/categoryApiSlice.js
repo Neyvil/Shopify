@@ -1,7 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import { CATEGORY_URL } from "../constant";
 
-export const categoryApiSlice = apiSlice.injectEndpoints({
+export const categoryApiSlice= apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
       query: (newCategory) => ({
@@ -25,7 +25,7 @@ export const categoryApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
-    
+
     fetchCategories: builder.query({
       query: () => ({
         url: `${CATEGORY_URL}/categories`,
@@ -40,4 +40,4 @@ export const {
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
   useFetchCategoriesQuery,
-} = categoryApiSlice;
+} = categoryApiSlice
