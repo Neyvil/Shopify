@@ -39,8 +39,8 @@ const Profile = () => {
           email,
           password,
         }).unwrap();
-        dispatch(setCredentials({...res}))
-        toast.success("Profile Updated successfully 🤞")
+        dispatch(setCredentials({ ...res }));
+        toast.success("Profile Updated successfully 🤞");
       } catch (error) {
         toast.error(error?.data?.message || error.message);
       }
@@ -109,7 +109,8 @@ const Profile = () => {
                   <button
                     type="button"
                     className="absolute right-2 top-1/2 transform -translate-y-1/2 text-cyan-400"
-                    onClick={togglePasswordVisiblity}
+                    onMouseDown={togglePasswordVisiblity}
+                    onMouseUp={togglePasswordVisiblity}
                   >
                     {showPassword ? <EyeOff /> : <Eye />}
                   </button>
@@ -131,7 +132,9 @@ const Profile = () => {
                   <button
                     type="button"
                     className="absolute right-2 top-1/2 transform -translate-y-1/2 text-cyan-400"
-                    onClick={toggleConfirmPasswordVisibility}
+                    onMouseDown={toggleConfirmPasswordVisibility}
+                    onMouseUp={toggleConfirmPasswordVisibility}
+                    
                   >
                     {showConfirmPassword ? <EyeOff /> : <Eye />}
                   </button>

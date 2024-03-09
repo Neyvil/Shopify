@@ -95,7 +95,8 @@ const Login = () => {
                 <button
                   type="button"
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 text-cyan-400"
-                  onClick={togglePasswordVisiblity}
+                  onMouseDown={togglePasswordVisiblity}
+                  onMouseUp={togglePasswordVisiblity}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
                 </button>
