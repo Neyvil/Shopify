@@ -1,11 +1,11 @@
 import { apiSlice } from "./apiSlice";
 import { CATEGORY_URL } from "../constant";
 
-export const categoryApiSlice= apiSlice.injectEndpoints({
+export const categoryApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
       query: (newCategory) => ({
-        url: CATEGORY_URL,
+        url: `${CATEGORY_URL}`,
         method: "POST",
         body: newCategory,
       }),
@@ -20,15 +20,14 @@ export const categoryApiSlice= apiSlice.injectEndpoints({
     }),
 
     deleteCategory: builder.mutation({
-      query: ({ categoryId }) => ({
+      query: (categoryId) => ({
         url: `${CATEGORY_URL}/${categoryId}`,
         method: "DELETE",
       }),
     }),
 
-    searchCategories: builder.query({
+    fetchCategories: builder.query({
       query: () => `${CATEGORY_URL}/categories`,
-        
     }),
   }),
 });
@@ -37,5 +36,5 @@ export const {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
-  useSearchCategoriesQuery,
-} = categoryApiSlice
+  useFetchCategoriesQuery,
+} = categoryApiSlice;

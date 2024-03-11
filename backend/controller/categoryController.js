@@ -41,9 +41,14 @@ const updateCategory = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
 const removeCategory = asyncHandler(async (req, res) => {
   try {
     const removed = await Category.findByIdAndDelete(req.params.categoryId);
+    if (!removed) {
+      return res.status(404).json({ error: "Category not found" });
+    }
     res.json(removed);
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
