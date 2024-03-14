@@ -67,9 +67,14 @@ const removeProduct = asyncHandler(async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     res.json(product);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({error:"Server error"})
+  }
 });
 
-const fetchProducts = asyncHandler(async (req, res) => {});
+const fetchProducts = asyncHandler(async (req, res) => {
+
+});
 
 export { addProduct, updateProductDetails, removeProduct, fetchProducts };
