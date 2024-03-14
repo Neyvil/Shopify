@@ -12,7 +12,7 @@ const reviewSchema = mongoose.Schema(
       ref: "User",
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 const productSchema = mongoose.Schema(
@@ -29,7 +29,7 @@ const productSchema = mongoose.Schema(
     price: { type: Number, required: true, default: 0 },
     countInStock: { type: Number, required: true, default: 0 },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 
