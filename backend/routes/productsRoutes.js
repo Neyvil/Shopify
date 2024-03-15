@@ -8,6 +8,9 @@ import {
   updateProductDetails,
   removeProduct,
   fetchProducts,
+  fetchProductsById,
+  fetchAllProducts,
+  addProductReviews,
 } from "../controller/productController.js";
 
 import {
@@ -16,9 +19,19 @@ import {
 } from "../middilewares/authMiddleware.js";
 import checkId from "../middilewares/checkId.js";
 
-router.route("/").get(fetchProducts).post(authenticate, authorizeAdmin, formidable(), addProduct);
+router
+  .route("/")
+  .get(fetchProducts)
+  .post(authenticate, authorizeAdmin, formidable(), addProduct);
+
+router.route("/allproducts").get(fetchAllProducts);
+router
+  .route("/:id/reviews")
+  .post(authenticate, authorizeAdmin, addProductReviews);
+
 router
   .route("/:id")
+  .get(fetchProductsById)
   .put(authenticate, authorizeAdmin, formidable(), updateProductDetails)
   .delete(authenticate, authorizeAdmin, removeProduct);
 
