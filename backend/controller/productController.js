@@ -123,7 +123,7 @@ const fetchAllProducts = asyncHandler(async (req, res) => {
   }
 });
 
-const addProductReviews = asyncHandler(async (req, res) => {
+const addProductReview = asyncHandler(async (req, res) => {
   try {
     const { rating, comment } = req.body;
     const product = await Product.findById(req.params.id);
@@ -145,7 +145,8 @@ const addProductReviews = asyncHandler(async (req, res) => {
         user: req.user._id,
       };
 
-      product.review.push(review);
+      product.reviews.push(review);
+
       product.numReviews = product.reviews.length;
 
       product.rating =
@@ -153,7 +154,7 @@ const addProductReviews = asyncHandler(async (req, res) => {
         product.reviews.length;
 
       await product.save();
-      res.statu(201).json({ message: "Reviews added" });
+      res.status(201).json({ message: "Review added" });
     } else {
       res.status(404);
       throw new Error("Product not found");
@@ -163,6 +164,17 @@ const addProductReviews = asyncHandler(async (req, res) => {
     res.status(400).json(error.message);
   }
 });
+
+const fetchTopProducts = asyncHandler(async (req, res) => {
+  try {
+    const product=await Product.find({}).sort({rating:-1}).limit(4);
+    res.json(product) 
+  } catch (error) {
+    console.error(error)
+    res.status(400).json(error.message);
+  }
+});
+
 export {
   addProduct,
   updateProductDetails,
@@ -170,5 +182,6 @@ export {
   fetchProducts,
   fetchProductsById,
   fetchAllProducts,
-  addProductReviews,
+  addProductReview,
+  fetchTopProducts,
 };
