@@ -167,11 +167,20 @@ const addProductReview = asyncHandler(async (req, res) => {
 
 const fetchTopProducts = asyncHandler(async (req, res) => {
   try {
-    const product=await Product.find({}).sort({rating:-1}).limit(4);
-    res.json(product) 
+    const product = await Product.find({}).sort({ rating: -1 }).limit(4);
+    res.json(product);
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(400).json(error.message);
+  }
+});
+const fetchNewProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find().sort({_id:-1}).limit(5)
+    res.json(products)
+  } catch (error) {
+    console.error(error);
+    res.status(404).json(error.message);
   }
 });
 
@@ -184,4 +193,5 @@ export {
   fetchAllProducts,
   addProductReview,
   fetchTopProducts,
+  fetchNewProducts,
 };
