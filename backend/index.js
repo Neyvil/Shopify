@@ -6,7 +6,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import productsRoutes from "./routes/productsRoutes.js"
+import productsRoutes from "./routes/productsRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js"
 
 //Utiles
 import connectDB from "./config/db.js";
@@ -24,5 +25,6 @@ app.use(cookieParser()); // Idid mistake here
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/products", productsRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.listen(port, () => console.log(`Server is running on port: ${port}`));
