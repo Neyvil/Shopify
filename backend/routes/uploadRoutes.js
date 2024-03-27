@@ -6,12 +6,15 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    const destination = "uploads/"; // Relative path
+    const resolvedPath = path.resolve(destination);
+    cb(null, destination);
   },
-
   filename: (req, file, cb) => {
     const extname = path.extname(file.originalname);
-    cb(null, `${file.fieldname}-${Date.now()}${extname}`);
+    const filename = `${file.fieldname}-${(Date.now()).toPrecision()}${extname}`;
+    console.log("Generated Filename:", filename); // Log the generated filename
+    cb(null, filename);
   },
 });
 

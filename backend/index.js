@@ -20,7 +20,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser()); // Idid mistake here
+app.use(cookieParser()); // I did mistake here
 
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
